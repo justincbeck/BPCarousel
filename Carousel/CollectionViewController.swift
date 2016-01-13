@@ -17,7 +17,7 @@ class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.registerNib(UINib.init(nibName: "CarouselCellView", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +36,19 @@ class CollectionViewController: UIViewController {
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
         cell.backgroundColor = indexPath.row % 2 == 1 ? UIColor.blackColor() : UIColor.redColor()
+        cell.dateLabel.textColor = indexPath.row % 2 == 0 ? UIColor.blackColor() : UIColor.redColor()
         
         cell.layer.borderColor = UIColor.purpleColor().CGColor
         cell.layer.borderWidth = 1.0
-        
-        let label = UILabel(frame: CGRectMake(0.0, 0.0, 90.0, 90.0))
-        label.text = "\(indexPath.row)"
-        label.textColor = UIColor.whiteColor()
-        cell.addSubview(label)
+        cell.dateLabel.text = "\(indexPath.row)"
     
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        
     }
 
     // MARK: UICollectionViewDelegate

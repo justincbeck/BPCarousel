@@ -13,6 +13,7 @@
 		982E82E11C46E1260005C9AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 982E82DF1C46E1260005C9AD /* LaunchScreen.storyboard */; };
 		982E82E91C46E4B70005C9AD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E82E81C46E4B70005C9AD /* CollectionViewController.swift */; };
 		982E82EB1C46E8300005C9AD /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E82EA1C46E8300005C9AD /* CollectionViewCell.swift */; };
+		982E82ED1C46F3620005C9AD /* CarouselCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982E82EC1C46F3620005C9AD /* CarouselCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		982E82E21C46E1260005C9AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		982E82E81C46E4B70005C9AD /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		982E82EA1C46E8300005C9AD /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		982E82EC1C46F3620005C9AD /* CarouselCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselCellView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				982E82D61C46E1260005C9AD /* AppDelegate.swift */,
 				982E82E81C46E4B70005C9AD /* CollectionViewController.swift */,
 				982E82EA1C46E8300005C9AD /* CollectionViewCell.swift */,
+				982E82EC1C46F3620005C9AD /* CarouselCellView.xib */,
 				982E82DA1C46E1260005C9AD /* Main.storyboard */,
 				982E82DD1C46E1260005C9AD /* Assets.xcassets */,
 				982E82DF1C46E1260005C9AD /* LaunchScreen.storyboard */,
@@ -127,6 +130,7 @@
 			files = (
 				982E82E11C46E1260005C9AD /* LaunchScreen.storyboard in Resources */,
 				982E82DE1C46E1260005C9AD /* Assets.xcassets in Resources */,
+				982E82ED1C46F3620005C9AD /* CarouselCellView.xib in Resources */,
 				982E82DC1C46E1260005C9AD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
