@@ -12,12 +12,18 @@ private let reuseIdentifier = "carouselCell"
 
 class CollectionViewController: UIViewController {
 
+    var dates = Array<Int>()
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.collectionView!.registerNib(UINib.init(nibName: "CarouselCellView", bundle: NSBundle.mainBundle()), forCellWithReuseIdentifier: reuseIdentifier)
+        
+        for i in 0...19
+        {
+            dates.append(i + 1)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,8 +53,27 @@ class CollectionViewController: UIViewController {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    func scrollViewDidScroll(scrollView: UIScrollView)
+    {
+        let offsetX = scrollView.contentOffset.x
+        let contentWidth = scrollView.contentSize.width
         
+        if offsetX > contentWidth - scrollView.frame.size.width {
+            var end: Int = dates.last!
+            var indexPaths = Array<NSIndexPath>()
+            
+            for _ in 0...19
+            {
+                end += 1
+                dates.append(end)
+                
+                let indexPath: NSIndexPath = NSIndexPath(forRow: dates.count, inSection: 0)
+                indexPaths.append(indexPath)
+            }
+            
+            collectionView.insertItemsAtIndexPaths(indexPaths)
+            self.collectionView.reloadData()
+        }
     }
 
     // MARK: UICollectionViewDelegate
