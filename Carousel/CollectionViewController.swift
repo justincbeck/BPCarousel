@@ -13,7 +13,7 @@ private let reuseIdentifier = "carouselCell"
 class CollectionViewController: UIViewController {
 
     var dates = Array<Int>()
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,12 @@ class CollectionViewController: UIViewController {
         {
             dates.append(i + 1)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.collectionView!.contentOffset = CGPointMake(1000, 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,44 +44,66 @@ class CollectionViewController: UIViewController {
 
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return dates.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
-        cell.backgroundColor = indexPath.row % 2 == 1 ? UIColor.blackColor() : UIColor.redColor()
-        cell.dateLabel.textColor = indexPath.row % 2 == 0 ? UIColor.blackColor() : UIColor.redColor()
         
-        cell.layer.borderColor = UIColor.purpleColor().CGColor
-        cell.layer.borderWidth = 1.0
-        cell.dateLabel.text = "\(indexPath.row)"
+        cell.backgroundColor = abs(dates[indexPath.row] % 2) == 1 ? UIColor.blackColor() : UIColor.redColor()
+
+        cell.dateLabel.textColor = abs(dates[indexPath.row] % 2) == 0 ? UIColor.blackColor() : UIColor.redColor()
+        cell.dateLabel.text = "\(dates[indexPath.row])"
     
         return cell
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
-        let offsetX = scrollView.contentOffset.x
-        let contentWidth = scrollView.contentSize.width
+        let visibleCells = collectionView.visibleCells()
+        let visibleCell = visibleCells[visibleCells.count / 2]
+        let visibleIndexPath = collectionView.indexPathForCell(visibleCell)
         
-        if offsetX > contentWidth - scrollView.frame.size.width {
+        if visibleIndexPath!.row > (dates.count - 6)
+        {
             var end: Int = dates.last!
-            var indexPaths = Array<NSIndexPath>()
             
-            for _ in 0...19
+            for _ in 0...3
             {
                 end += 1
                 dates.append(end)
                 
-                let indexPath: NSIndexPath = NSIndexPath(forRow: dates.count, inSection: 0)
-                indexPaths.append(indexPath)
+                self.collectionView.reloadData()
             }
-            
-            collectionView.insertItemsAtIndexPaths(indexPaths)
-            self.collectionView.reloadData()
         }
+        else if visibleIndexPath!.row < 3
+        {
+//            var begin: Int = dates.first!
+//            var indexPaths = Array<NSIndexPath>()
+//            
+//            for _ in 0...3
+//            {
+//                begin -= 1
+//                dates.insert(begin, atIndex: 0)
+//                let indexPath = NSIndexPath(forItem: 0, inSection: 0)
+//                indexPaths.insert(indexPath, atIndex: 0)
+//                
+//                debugPrint(begin)
+//                debugPrint(dates.count)
+//            }
+//            
+//            collectionView.insertItemsAtIndexPaths(indexPaths)
+        }
+        
     }
 
+    @IBAction func buttonTapped(sender: AnyObject) {
+//        dates.append(9)
+        dates.insert(9, atIndex: 0)
+        collectionView.contentOffset.x = collectionView.contentOffset.x + CGFloat(100.0)
+        collectionView.reloadData()
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
